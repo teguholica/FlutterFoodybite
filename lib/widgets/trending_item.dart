@@ -7,24 +7,24 @@ class TrendingItem extends StatefulWidget {
   final String address;
   final String rating;
 
-  TrendingItem({
-    Key key,
-    @required this.img,
-    @required this.title,
-    @required this.address,
-    @required this.rating,
-  }) : super(key: key);
+  const TrendingItem({
+    super.key,
+    required this.img,
+    required this.title,
+    required this.address,
+    required this.rating,
+  });
 
   @override
-  _TrendingItemState createState() => _TrendingItemState();
+  State<TrendingItem> createState() => _TrendingItemState();
 }
 
 class _TrendingItemState extends State<TrendingItem> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: 5.0, bottom: 5.0),
-      child: Container(
+      padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
+      child: SizedBox(
         height: MediaQuery.of(context).size.height / 2.5,
         width: MediaQuery.of(context).size.width,
         child: Card(
@@ -35,16 +35,16 @@ class _TrendingItemState extends State<TrendingItem> {
             children: <Widget>[
               Stack(
                 children: <Widget>[
-                  Container(
+                  SizedBox(
                     height: MediaQuery.of(context).size.height / 3.5,
                     width: MediaQuery.of(context).size.width,
                     child: ClipRRect(
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(10),
                         topRight: Radius.circular(10),
                       ),
                       child: Image.asset(
-                        "${widget.img}",
+                        widget.img,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -56,7 +56,7 @@ class _TrendingItemState extends State<TrendingItem> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(4.0)),
                       child: Padding(
-                        padding: EdgeInsets.all(2.0),
+                        padding: const EdgeInsets.all(2.0),
                         child: Row(
                           children: <Widget>[
                             Icon(
@@ -66,7 +66,7 @@ class _TrendingItemState extends State<TrendingItem> {
                             ),
                             Text(
                               " ${widget.rating} ",
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 10.0,
                               ),
                             ),
@@ -81,7 +81,7 @@ class _TrendingItemState extends State<TrendingItem> {
                     child: Card(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(3.0)),
-                      child: Padding(
+                      child: const Padding(
                         padding: EdgeInsets.all(4.0),
                         child: Text(
                           " OPEN",
@@ -96,14 +96,14 @@ class _TrendingItemState extends State<TrendingItem> {
                   ),
                 ],
               ),
-              SizedBox(height: 7.0),
+              const SizedBox(height: 7.0),
               Padding(
-                padding: EdgeInsets.only(left: 15.0),
-                child: Container(
+                padding: const EdgeInsets.only(left: 15.0),
+                child: SizedBox(
                   width: MediaQuery.of(context).size.width,
                   child: Text(
-                    "${widget.title}",
-                    style: TextStyle(
+                    widget.title,
+                    style: const TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.w800,
                     ),
@@ -111,21 +111,21 @@ class _TrendingItemState extends State<TrendingItem> {
                   ),
                 ),
               ),
-              SizedBox(height: 7.0),
+              const SizedBox(height: 7.0),
               Padding(
-                padding: EdgeInsets.only(left: 15.0),
-                child: Container(
+                padding: const EdgeInsets.only(left: 15.0),
+                child: SizedBox(
                   width: MediaQuery.of(context).size.width,
                   child: Text(
-                    "${widget.address}",
-                    style: TextStyle(
+                    widget.address,
+                    style: const TextStyle(
                       fontSize: 12.0,
                       fontWeight: FontWeight.w300,
                     ),
                   ),
                 ),
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
             ],
           ),
         ),

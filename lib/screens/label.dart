@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 
 class Label extends StatelessWidget {
-  const Label({Key key}) : super(key: key);
+  const Label({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text('Label'),
-      ),
+    return const Center(
+      child: Text('Label'),
     );
   }
 }

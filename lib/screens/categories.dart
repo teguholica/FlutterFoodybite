@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_foodybite/util/categories.dart';
-import 'package:flutter_foodybite/widgets/category_item.dart';
 
 class Categories extends StatefulWidget {
+  const Categories({super.key});
+
   @override
-  _CategoriesState createState() => _CategoriesState();
+  State<Categories> createState() => _CategoriesState();
 }
 
 class _CategoriesState extends State<Categories> {
@@ -13,11 +14,11 @@ class _CategoriesState extends State<Categories> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        title: Text('Categories'),
+        title: const Text('Categories'),
         centerTitle: true,
       ),
       body: Padding(
-        padding: EdgeInsets.all(
+        padding: const EdgeInsets.all(
           5.0,
         ),
         child: GridView.count(
@@ -27,7 +28,7 @@ class _CategoriesState extends State<Categories> {
             (index) {
               var cat = categories[index];
               return Container(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Stack(
@@ -44,7 +45,7 @@ class _CategoriesState extends State<Categories> {
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
                             // Add one stop for each color. Stops should increase from 0 to 1
-                            stops: [0.2, 0.7],
+                            stops: const [0.2, 0.7],
                             colors: [
                               cat['color1'],
                               cat['color2'],
@@ -67,7 +68,7 @@ class _CategoriesState extends State<Categories> {
                           child: Center(
                             child: Text(
                               cat["name"],
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,

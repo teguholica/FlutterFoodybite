@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_foodybite/screens/categories.dart';
 import 'package:flutter_foodybite/screens/trending.dart';
@@ -11,65 +9,68 @@ import 'package:flutter_foodybite/widgets/search_card.dart';
 import 'package:flutter_foodybite/widgets/slide_item.dart';
 
 class Home extends StatelessWidget {
+  const Home({super.key});
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         FocusScopeNode currentFocus = FocusScope.of(context);
-        if(!currentFocus.hasPrimaryFocus){
+        if (!currentFocus.hasPrimaryFocus) {
           currentFocus.unfocus();
         }
       },
       child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.fromLTRB(10.0, 0, 10.0, 0),
-          child: ListView(
-            children: <Widget>[
-              buildSearchBar(context),
-              SizedBox(height: 20.0),
-              buildRestaurantRow('Trending Restaurants', context),
-              SizedBox(height: 10.0),
-              buildRestaurantList(context),
-              SizedBox(height: 10.0),
-              buildCategoryRow('Category', context),
-              SizedBox(height: 10.0),
-              buildCategoryList(context),
-              SizedBox(height: 20.0),
-              buildCategoryRow('Friends', context),
-              SizedBox(height: 10.0),
-              buildFriendsList(),
-              SizedBox(height: 30.0),
-            ],
-          ),
+        body: ListView(
+          children: <Widget>[
+            buildSearchBar(context),
+            const SizedBox(height: 20.0),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: buildRestaurantRow('Trending Restaurants', context),
+            ),
+            const SizedBox(height: 10.0),
+            buildRestaurantList(context),
+            const SizedBox(height: 10.0),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: buildCategoryRow('Category', context),
+            ),
+            const SizedBox(height: 10.0),
+            buildCategoryList(context),
+            const SizedBox(height: 20.0),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: buildCategoryRow('Friends', context),
+            ),
+            const SizedBox(height: 10.0),
+            buildFriendsList(),
+            const SizedBox(height: 30.0),
+          ],
         ),
       ),
     );
   }
 
-  buildRestaurantRow(String restaurant, BuildContext context) {
+  Widget buildRestaurantRow(String restaurant, BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Text(
-          "$restaurant",
-          style: TextStyle(
+          restaurant,
+          style: const TextStyle(
             fontSize: 20.0,
             fontWeight: FontWeight.w800,
           ),
         ),
-        FlatButton(
-          child: Text(
-            "See all (9)",
-            style: TextStyle(
-              color: Theme.of(context).accentColor,
-            ),
-          ),
+        TextButton(
+          child: const Text("See all (9)"),
           onPressed: () {
             Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (BuildContext context) {
-                  return Trending();
+                  return const Trending();
                 },
               ),
             );
@@ -79,30 +80,25 @@ class Home extends StatelessWidget {
     );
   }
 
-  buildCategoryRow(String category, BuildContext context) {
+  Widget buildCategoryRow(String category, BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Text(
-          "$category",
-          style: TextStyle(
+          category,
+          style: const TextStyle(
             fontSize: 20.0,
             fontWeight: FontWeight.w800,
           ),
         ),
-        FlatButton(
-          child: Text(
-            "See all (9)",
-            style: TextStyle(
-              color: Theme.of(context).accentColor,
-            ),
-          ),
+        TextButton(
+          child: const Text("See all (9)"),
           onPressed: () {
             Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (BuildContext context) {
-                  return Categories();
+                  return const Categories();
                 },
               ),
             );
@@ -114,19 +110,19 @@ class Home extends StatelessWidget {
 
   buildSearchBar(BuildContext context) {
     return Container(
-        margin: EdgeInsets.fromLTRB(10, 5, 10, 0),
-        child: SearchCard()
-    );
+        margin: const EdgeInsets.fromLTRB(10, 5, 10, 0),
+        child: const SearchCard());
   }
 
   buildCategoryList(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height / 6,
       child: ListView.builder(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         primary: false,
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,
-        itemCount: categories == null ? 0 : categories.length,
+        itemCount: categories.length,
         itemBuilder: (BuildContext context, int index) {
           Map cat = categories[index];
 
@@ -139,14 +135,15 @@ class Home extends StatelessWidget {
   }
 
   buildRestaurantList(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height / 2.4,
       width: MediaQuery.of(context).size.width,
       child: ListView.builder(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         primary: false,
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
-        itemCount: restaurants == null ? 0 : restaurants.length,
+        itemCount: restaurants.length,
         itemBuilder: (BuildContext context, int index) {
           Map restaurant = restaurants[index];
 
@@ -165,13 +162,14 @@ class Home extends StatelessWidget {
   }
 
   buildFriendsList() {
-    return Container(
+    return SizedBox(
       height: 50.0,
       child: ListView.builder(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         primary: false,
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,
-        itemCount: friends == null ? 0 : friends.length,
+        itemCount: friends.length,
         itemBuilder: (BuildContext context, int index) {
           String img = friends[index];
 

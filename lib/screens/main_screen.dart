@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_foodybite/screens/add.dart';
-import 'package:flutter_foodybite/screens/home.dart';
-import 'package:flutter_foodybite/screens/label.dart';
-import 'package:flutter_foodybite/screens/profile.dart';
 
+import 'add.dart';
+import 'home.dart';
+import 'label.dart';
 import 'notifications.dart';
+import 'profile.dart';
 
 class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
+
   @override
-  _MainScreenState createState() => _MainScreenState();
+  State<MainScreen> createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
-  PageController _pageController;
+  late final _pageController = PageController();
   int _page = 0;
 
   List icons = [
@@ -24,23 +26,30 @@ class _MainScreenState extends State<MainScreen> {
   ];
 
   List pages = [
-    Home(),
-    Label(),
-    Add(),
-    Notifications(),
-    Profile(),
+    const Home(),
+    const Label(),
+    const Add(),
+    const Notifications(),
+    const Profile(),
   ];
+
+  @override
+  void dispose() {
+    super.dispose();
+    _pageController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         controller: _pageController,
         onPageChanged: onPageChanged,
-        children: List.generate(5, (index) =>  pages[index] ),
+        children: List.generate(5, (index) => pages[index]),
       ),
       bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -53,14 +62,12 @@ class _MainScreenState extends State<MainScreen> {
             // SizedBox(width: 7),
           ],
         ),
-        color: Theme.of(context).primaryColor,
-        shape: CircularNotchedRectangle(),
       ),
       floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        elevation: 10.0,
-        child: Icon(
+        shape: const CircleBorder(),
+        child: const Icon(
           Icons.add,
         ),
         onPressed: () => _pageController.jumpToPage(2),
@@ -68,41 +75,24 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
- // void navigationTapped(int page) {
- //    _pageController.jumpToPage(page);
- //  }
-
-  @override
-  void initState() {
-    super.initState();
-    _pageController = PageController();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _pageController.dispose();
-  }
-
   void onPageChanged(int page) {
     setState(() {
-      this._page = page;
+      _page = page;
     });
   }
 
   buildTabIcon(int index) {
-      return Container(
-        margin: EdgeInsets.fromLTRB( index == 3 ? 30 : 0, 0,  index == 1 ? 30 : 0, 0),
-        child: IconButton(
-          icon: Icon(
-            icons[index],
-            size: 24.0,
-          ),
-          color: _page == index
-              ? Theme.of(context).accentColor
-              : Theme.of(context).textTheme.caption.color,
-          onPressed: () => _pageController.jumpToPage(index),
+    return Container(
+      margin:
+          EdgeInsets.fromLTRB(index == 3 ? 30 : 0, 0, index == 1 ? 30 : 0, 0),
+      child: IconButton(
+        icon: Icon(
+          icons[index],
+          size: 24.0,
         ),
-      );
+        isSelected: _page == index,
+        onPressed: () => _pageController.jumpToPage(index),
+      ),
+    );
   }
 }

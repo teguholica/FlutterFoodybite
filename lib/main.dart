@@ -2,16 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_foodybite/screens/main_screen.dart';
 import 'package:flutter_foodybite/util/const.dart';
 
-void main() async {
-  runApp(MyApp());
+void main() {
+  runApp(const MainApp());
 }
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
+class MainApp extends StatelessWidget {
+  const MainApp({super.key});
 
-class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,7 +16,7 @@ class _MyAppState extends State<MyApp> {
       title: Constants.appName,
       theme: Constants.lightTheme,
       darkTheme: Constants.darkTheme,
-      home: MainScreen(),
+      home: const MainScreen(),
     );
   }
 }
